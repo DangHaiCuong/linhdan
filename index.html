@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mèo Phi Hành Gia Trong Vũ Trụ</title>
+    <title>Mèo Phi Hành Gia Cartoon - Vũ Trụ Sống Động</title>
     <style>
         * {
             margin: 0;
@@ -13,19 +13,75 @@
 
         body {
             overflow: hidden;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', sans-serif;
         }
 
-        /* Nền vũ trụ */
+        /* Nền vũ trụ gradient động */
         .space {
             position: fixed;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, #0a0e27 0%, #1a1a3e 50%, #0f0c29 100%);
+            background: linear-gradient(135deg,
+                #1a1a2e 0%,
+                #16213e 20%,
+                #0f3460 40%,
+                #533483 60%,
+                #e94560 80%,
+                #ff6b9d 100%
+            );
+            background-size: 400% 400%;
+            animation: gradientShift 20s ease infinite;
             overflow: hidden;
         }
 
-        /* Animation các ngôi sao */
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Nebula clouds */
+        .nebula {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.4;
+            animation: nebulaPulse 8s ease-in-out infinite;
+        }
+
+        @keyframes nebulaPulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.2); }
+        }
+
+        .nebula1 {
+            top: 10%;
+            left: 5%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #ff6ec7, #7873f5);
+            animation-delay: 0s;
+        }
+
+        .nebula2 {
+            bottom: 15%;
+            right: 10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #4facfe, #00f2fe);
+            animation-delay: 2s;
+        }
+
+        .nebula3 {
+            top: 40%;
+            right: 20%;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, #f093fb, #f5576c);
+            animation-delay: 4s;
+        }
+
+        /* Ngôi sao lấp lánh */
         .stars {
             position: absolute;
             width: 100%;
@@ -36,275 +92,718 @@
             position: absolute;
             background: white;
             border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
             animation: twinkle 3s infinite;
         }
 
         @keyframes twinkle {
             0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
+            50% { opacity: 1; transform: scale(1.5); }
         }
 
-        /* Shooting stars */
+        /* Sao băng */
         .shooting-star {
             position: absolute;
-            width: 2px;
-            height: 2px;
+            width: 3px;
+            height: 3px;
             background: white;
             border-radius: 50%;
-            box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
-            animation: shoot 3s linear infinite;
+            box-shadow:
+                0 0 10px 2px rgba(255, 255, 255, 1),
+                0 0 20px 4px rgba(100, 200, 255, 0.8);
+            animation: shoot 4s linear infinite;
         }
 
         @keyframes shoot {
             0% {
-                transform: translateX(0) translateY(0);
+                transform: translateX(0) translateY(0) scale(1);
+                opacity: 1;
+            }
+            70% {
                 opacity: 1;
             }
             100% {
-                transform: translateX(-300px) translateY(300px);
+                transform: translateX(-400px) translateY(400px) scale(0);
                 opacity: 0;
             }
         }
 
-        /* Container mèo phi hành gia */
+        /* Container mèo */
         .astronaut-cat-container {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            animation: float 6s ease-in-out infinite;
+            animation: floatBounce 4s ease-in-out infinite;
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
         }
 
-        @keyframes float {
+        @keyframes floatBounce {
             0%, 100% {
-                transform: translate(-50%, -50%) translateY(0px) rotate(-5deg);
+                transform: translate(-50%, -50%) translateY(0px) rotate(-3deg);
+            }
+            25% {
+                transform: translate(-50%, -50%) translateY(-20px) rotate(2deg);
             }
             50% {
-                transform: translate(-50%, -50%) translateY(-30px) rotate(5deg);
+                transform: translate(-50%, -50%) translateY(-30px) rotate(0deg);
+            }
+            75% {
+                transform: translate(-50%, -50%) translateY(-20px) rotate(-2deg);
             }
         }
 
-        /* Mèo phi hành gia */
         .astronaut-cat {
             position: relative;
-            width: 200px;
-            height: 200px;
+            width: 280px;
+            height: 320px;
         }
 
-        /* Bong bóng không gian (mũ phi hành gia) */
+        /* Mũ phi hành gia với hiệu ứng kính */
         .helmet {
             position: absolute;
-            top: -20px;
+            top: 10px;
             left: 50%;
             transform: translateX(-50%);
-            width: 140px;
-            height: 140px;
-            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(
+                circle at 35% 35%,
+                rgba(255, 255, 255, 0.5),
+                rgba(255, 255, 255, 0.2) 40%,
+                rgba(150, 200, 255, 0.15) 70%,
+                rgba(100, 150, 255, 0.1)
+            );
             border-radius: 50%;
-            border: 3px solid rgba(200, 230, 255, 0.5);
+            border: 4px solid rgba(220, 240, 255, 0.6);
             box-shadow:
-                inset 0 0 30px rgba(255, 255, 255, 0.2),
-                0 0 30px rgba(100, 200, 255, 0.3);
+                inset 20px 20px 40px rgba(255, 255, 255, 0.3),
+                inset -10px -10px 30px rgba(0, 0, 0, 0.1),
+                0 0 50px rgba(100, 200, 255, 0.4),
+                0 10px 30px rgba(0, 0, 0, 0.2);
             z-index: 10;
-            animation: helmetGlow 2s ease-in-out infinite;
+            animation: helmetShine 3s ease-in-out infinite;
         }
 
-        @keyframes helmetGlow {
-            0%, 100% { box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.2), 0 0 30px rgba(100, 200, 255, 0.3); }
-            50% { box-shadow: inset 0 0 40px rgba(255, 255, 255, 0.3), 0 0 40px rgba(100, 200, 255, 0.5); }
+        @keyframes helmetShine {
+            0%, 100% {
+                box-shadow:
+                    inset 20px 20px 40px rgba(255, 255, 255, 0.3),
+                    inset -10px -10px 30px rgba(0, 0, 0, 0.1),
+                    0 0 50px rgba(100, 200, 255, 0.4),
+                    0 10px 30px rgba(0, 0, 0, 0.2);
+            }
+            50% {
+                box-shadow:
+                    inset 20px 20px 60px rgba(255, 255, 255, 0.4),
+                    inset -10px -10px 30px rgba(0, 0, 0, 0.1),
+                    0 0 70px rgba(100, 200, 255, 0.6),
+                    0 10px 30px rgba(0, 0, 0, 0.2);
+            }
         }
 
-        /* Viền mũ */
+        /* Ánh sáng phản chiếu trên mũ */
+        .helmet-reflection {
+            position: absolute;
+            top: 25px;
+            left: 50px;
+            width: 60px;
+            height: 80px;
+            background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.6) 0%,
+                rgba(255, 255, 255, 0.2) 50%,
+                transparent 100%
+            );
+            border-radius: 50% 40% 40% 50%;
+            transform: rotate(-25deg);
+            z-index: 11;
+            animation: reflectionShimmer 4s ease-in-out infinite;
+        }
+
+        @keyframes reflectionShimmer {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 0.9; }
+        }
+
+        /* Viền mũ kim loại */
         .helmet-ring {
             position: absolute;
-            top: 100px;
+            top: 160px;
             left: 50%;
             transform: translateX(-50%);
-            width: 160px;
-            height: 40px;
-            background: linear-gradient(to bottom, #e8e8e8, #b0b0b0);
+            width: 200px;
+            height: 50px;
+            background: linear-gradient(to bottom,
+                #f0f0f0 0%,
+                #e0e0e0 20%,
+                #c0c0c0 50%,
+                #a0a0a0 80%,
+                #808080 100%
+            );
             border-radius: 50%;
+            box-shadow:
+                0 8px 20px rgba(0, 0, 0, 0.4),
+                inset 0 2px 5px rgba(255, 255, 255, 0.5),
+                inset 0 -2px 5px rgba(0, 0, 0, 0.3);
             z-index: 5;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Chi tiết viền mũ */
+        .helmet-ring::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 20px;
+            background: linear-gradient(to bottom,
+                rgba(100, 150, 200, 0.3),
+                rgba(50, 100, 150, 0.2)
+            );
+            border-radius: 50%;
+        }
+
+        /* Tai mèo dễ thương */
+        .ear {
+            position: absolute;
+            z-index: 7;
+        }
+
+        .ear.left {
+            top: 55px;
+            left: 30px;
+            width: 0;
+            height: 0;
+            border-left: 28px solid transparent;
+            border-right: 28px solid transparent;
+            border-bottom: 55px solid #ff9a56;
+            transform: rotate(-35deg);
+            filter: drop-shadow(-2px 2px 3px rgba(0, 0, 0, 0.2));
+        }
+
+        .ear.right {
+            top: 55px;
+            right: 30px;
+            width: 0;
+            height: 0;
+            border-left: 28px solid transparent;
+            border-right: 28px solid transparent;
+            border-bottom: 55px solid #ff9a56;
+            transform: rotate(35deg);
+            filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.2));
+        }
+
+        /* Phần bên trong tai */
+        .ear-inner {
+            position: absolute;
+            width: 0;
+            height: 0;
+        }
+
+        .ear.left .ear-inner {
+            bottom: -40px;
+            left: -15px;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 30px solid #ffd4a3;
+        }
+
+        .ear.right .ear-inner {
+            bottom: -40px;
+            right: -15px;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 30px solid #ffd4a3;
         }
 
         /* Đầu mèo */
         .cat-head {
             position: absolute;
-            top: 60px;
+            top: 85px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 130px;
+            height: 130px;
+            background: linear-gradient(135deg, #ffb347 0%, #ff9a56 100%);
+            border-radius: 50%;
+            z-index: 8;
+            box-shadow:
+                inset -5px -5px 10px rgba(0, 0, 0, 0.1),
+                inset 5px 5px 10px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Vằn trên đầu */
+        .stripe {
+            position: absolute;
+            background: #ff8833;
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+
+        .stripe1 {
+            top: 20px;
+            right: 15px;
+            width: 30px;
+            height: 8px;
+            transform: rotate(-15deg);
+        }
+
+        .stripe2 {
+            top: 32px;
+            right: 12px;
+            width: 35px;
+            height: 8px;
+            transform: rotate(-10deg);
+        }
+
+        .stripe3 {
+            top: 44px;
+            right: 15px;
+            width: 28px;
+            height: 8px;
+            transform: rotate(-5deg);
+        }
+
+        /* Mắt mèo lớn và dễ thương */
+        .eyes {
+            position: absolute;
+            top: 125px;
             left: 50%;
             transform: translateX(-50%);
             width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, #ffa500 0%, #ff8c00 100%);
-            border-radius: 50%;
-            z-index: 8;
-        }
-
-        /* Tai mèo */
-        .ear {
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            border-bottom: 40px solid #ffa500;
-            z-index: 7;
-        }
-
-        .ear.left {
-            top: 45px;
-            left: 20px;
-            transform: rotate(-30deg);
-        }
-
-        .ear.right {
-            top: 45px;
-            right: 20px;
-            transform: rotate(30deg);
-        }
-
-        /* Mắt mèo */
-        .eyes {
-            position: absolute;
-            top: 95px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
             display: flex;
             justify-content: space-between;
             z-index: 9;
         }
 
         .eye {
-            width: 20px;
-            height: 25px;
+            width: 32px;
+            height: 38px;
             background: #000;
             border-radius: 50%;
             position: relative;
-            animation: blink 4s infinite;
+            animation: blinkEye 5s infinite;
+            box-shadow:
+                inset 0 2px 5px rgba(255, 255, 255, 0.3),
+                0 2px 5px rgba(0, 0, 0, 0.3);
         }
 
-        @keyframes blink {
-            0%, 48%, 52%, 100% { height: 25px; }
-            50% { height: 3px; }
+        @keyframes blinkEye {
+            0%, 48%, 52%, 96%, 100% {
+                height: 38px;
+                transform: scaleY(1);
+            }
+            50% {
+                height: 4px;
+                transform: scaleY(0.1);
+            }
+            98% {
+                height: 4px;
+                transform: scaleY(0.1);
+            }
         }
 
+        /* Ánh mắt lấp lánh */
         .eye::after {
             content: '';
             position: absolute;
-            top: 5px;
-            left: 5px;
-            width: 6px;
-            height: 6px;
+            top: 8px;
+            left: 10px;
+            width: 10px;
+            height: 12px;
             background: white;
             border-radius: 50%;
+            box-shadow: 3px 6px 0 -2px rgba(255, 255, 255, 0.5);
         }
 
-        /* Mũi mèo */
+        /* Má hồng */
+        .cheeks {
+            position: absolute;
+            top: 148px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 9;
+        }
+
+        .cheek {
+            width: 28px;
+            height: 22px;
+            background: radial-gradient(circle, #ff9999, transparent 70%);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: blush 3s ease-in-out infinite;
+        }
+
+        @keyframes blush {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+
+        /* Mũi tam giác dễ thương */
         .nose {
             position: absolute;
-            top: 110px;
+            top: 155px;
             left: 50%;
             transform: translateX(-50%);
             width: 0;
             height: 0;
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-            border-top: 10px solid #ff6b6b;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 12px solid #ff6b9d;
+            z-index: 9;
+            filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
+        }
+
+        /* Miệng cười */
+        .mouth {
+            position: absolute;
+            top: 165px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 20px;
             z-index: 9;
         }
 
-        /* Bộ đồ phi hành gia */
-        .space-suit {
+        .mouth::before,
+        .mouth::after {
+            content: '';
             position: absolute;
-            top: 150px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height: 100px;
-            background: linear-gradient(135deg, #f0f0f0 0%, #d0d0d0 100%);
-            border-radius: 40px 40px 50px 50px;
-            z-index: 6;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            width: 25px;
+            height: 15px;
+            border: 2px solid #ff6b9d;
+            border-top: none;
+            border-radius: 0 0 15px 15px;
         }
 
-        /* Logo trên bộ đồ */
-        .suit-logo {
+        .mouth::before {
+            left: 0;
+            border-right: none;
+        }
+
+        .mouth::after {
+            right: 0;
+            border-left: none;
+        }
+
+        /* Râu mèo */
+        .whiskers {
             position: absolute;
-            top: 20px;
+            top: 145px;
             left: 50%;
             transform: translateX(-50%);
-            width: 40px;
-            height: 40px;
-            background: #4a90e2;
+            width: 180px;
+            height: 30px;
+            z-index: 9;
+        }
+
+        .whisker {
+            position: absolute;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 2px;
+            animation: whiskerWiggle 3s ease-in-out infinite;
+        }
+
+        @keyframes whiskerWiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(2deg); }
+            75% { transform: rotate(-2deg); }
+        }
+
+        .whisker.left1 {
+            left: -50px;
+            top: 5px;
+            width: 50px;
+            transform-origin: right center;
+            animation-delay: 0s;
+        }
+
+        .whisker.left2 {
+            left: -48px;
+            top: 15px;
+            width: 48px;
+            transform-origin: right center;
+            animation-delay: 0.5s;
+        }
+
+        .whisker.left3 {
+            left: -45px;
+            top: 25px;
+            width: 45px;
+            transform-origin: right center;
+            animation-delay: 1s;
+        }
+
+        .whisker.right1 {
+            right: -50px;
+            top: 5px;
+            width: 50px;
+            transform-origin: left center;
+            animation-delay: 0.2s;
+        }
+
+        .whisker.right2 {
+            right: -48px;
+            top: 15px;
+            width: 48px;
+            transform-origin: left center;
+            animation-delay: 0.7s;
+        }
+
+        .whisker.right3 {
+            right: -45px;
+            top: 25px;
+            width: 45px;
+            transform-origin: left center;
+            animation-delay: 1.2s;
+        }
+
+        /* Bộ đồ phi hành gia chi tiết */
+        .space-suit {
+            position: absolute;
+            top: 195px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 130px;
+            background: linear-gradient(135deg, #ffffff 0%, #e8e8e8 50%, #d0d0d0 100%);
+            border-radius: 45px 45px 60px 60px;
+            z-index: 6;
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.3),
+                inset 0 -5px 15px rgba(0, 0, 0, 0.1),
+                inset 0 5px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Logo NASA style trên ngực */
+        .suit-logo {
+            position: absolute;
+            top: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
+            box-shadow:
+                0 5px 15px rgba(79, 172, 254, 0.5),
+                inset 0 2px 5px rgba(255, 255, 255, 0.3);
+            animation: logoPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes logoPulse {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.05); }
+        }
+
+        /* Chi tiết bộ đồ - dây nối oxy */
+        .suit-tube {
+            position: absolute;
+            width: 8px;
+            background: linear-gradient(to bottom, #ffcc00, #ff9900);
+            border-radius: 4px;
+            box-shadow:
+                inset 0 1px 2px rgba(255, 255, 255, 0.5),
+                0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .suit-tube.left {
+            top: 50px;
+            left: 15px;
+            height: 70px;
+            transform: rotate(-15deg);
+        }
+
+        .suit-tube.right {
+            top: 50px;
+            right: 15px;
+            height: 70px;
+            transform: rotate(15deg);
+        }
+
+        /* Túi đựng đồ trên bộ đồ */
+        .suit-pocket {
+            position: absolute;
+            bottom: 20px;
+            width: 35px;
+            height: 30px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 5px 5px 15px 15px;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .suit-pocket.left {
+            left: 25px;
+        }
+
+        .suit-pocket.right {
+            right: 25px;
+        }
+
+        /* Tay áo */
+        .arms {
+            position: absolute;
+            top: 210px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 5;
+        }
+
+        .arm {
+            width: 35px;
+            height: 85px;
+            background: linear-gradient(to bottom, #f0f0f0, #d0d0d0);
+            border-radius: 20px;
+            box-shadow:
+                0 5px 15px rgba(0, 0, 0, 0.2),
+                inset 0 2px 5px rgba(255, 255, 255, 0.3);
+            animation: armSwing 3s ease-in-out infinite;
+        }
+
+        .arm.left {
+            transform-origin: top center;
+            animation-delay: 0s;
+        }
+
+        .arm.right {
+            transform-origin: top center;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes armSwing {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+
+        /* Bàn tay trong găng tay */
+        .hand {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #e0e0e0, #c0c0c0);
+            border-radius: 50%;
+            box-shadow:
+                0 3px 8px rgba(0, 0, 0, 0.3),
+                inset 0 1px 3px rgba(255, 255, 255, 0.4);
         }
 
         /* Chân mèo */
         .legs {
             position: absolute;
-            bottom: -20px;
+            bottom: -35px;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px;
+            width: 120px;
             display: flex;
             justify-content: space-around;
             z-index: 5;
         }
 
         .leg {
-            width: 20px;
-            height: 40px;
-            background: linear-gradient(to bottom, #ffa500, #ff8c00);
-            border-radius: 10px;
-            animation: legSwing 3s ease-in-out infinite;
+            width: 32px;
+            height: 50px;
+            background: linear-gradient(to bottom, #ffb347, #ff9a56);
+            border-radius: 15px;
+            box-shadow:
+                0 5px 15px rgba(0, 0, 0, 0.2),
+                inset -2px -2px 5px rgba(0, 0, 0, 0.1);
+            animation: legKick 3s ease-in-out infinite;
+        }
+
+        .leg:nth-child(1) {
+            animation-delay: 0s;
         }
 
         .leg:nth-child(2) {
             animation-delay: 1.5s;
         }
 
-        @keyframes legSwing {
+        @keyframes legKick {
             0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-10deg); }
-            75% { transform: rotate(10deg); }
+            25% { transform: rotate(-8deg); }
+            75% { transform: rotate(8deg); }
         }
 
-        /* Hành tinh */
+        /* Đuôi mèo vẫy */
+        .tail {
+            position: absolute;
+            top: 230px;
+            right: -45px;
+            width: 60px;
+            height: 60px;
+            border: 18px solid #ff9a56;
+            border-color: transparent transparent #ff9a56 #ff9a56;
+            border-radius: 50%;
+            transform: rotate(-40deg);
+            z-index: 4;
+            animation: tailWag 2s ease-in-out infinite;
+        }
+
+        @keyframes tailWag {
+            0%, 100% { transform: rotate(-40deg); }
+            50% { transform: rotate(-25deg); }
+        }
+
+        /* Hành tinh chi tiết với texture */
         .planet {
             position: absolute;
             border-radius: 50%;
-            animation: rotatePlanet 30s linear infinite;
+            animation: orbitPlanet 40s linear infinite;
         }
 
         .planet1 {
-            top: 15%;
-            left: 10%;
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%);
-            box-shadow: 0 0 40px rgba(255, 107, 157, 0.4);
+            top: 12%;
+            left: 8%;
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 60%, #4a2c4a 100%);
+            box-shadow:
+                0 0 60px rgba(255, 107, 157, 0.6),
+                inset -10px -10px 40px rgba(0, 0, 0, 0.3),
+                inset 5px 5px 20px rgba(255, 255, 255, 0.2);
         }
+
+        /* Crater trên hành tinh */
+        .crater {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .crater1 { top: 20%; left: 25%; width: 15px; height: 15px; }
+        .crater2 { top: 45%; left: 50%; width: 20px; height: 20px; }
+        .crater3 { top: 60%; left: 20%; width: 12px; height: 12px; }
+        .crater4 { top: 30%; right: 15%; width: 18px; height: 18px; }
 
         .planet2 {
-            bottom: 20%;
-            right: 15%;
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            box-shadow: 0 0 50px rgba(79, 172, 254, 0.4);
-        }
-
-        @keyframes rotatePlanet {
-            0% { transform: rotate(0deg) translateX(20px) rotate(0deg); }
-            100% { transform: rotate(360deg) translateX(20px) rotate(-360deg); }
+            bottom: 15%;
+            right: 10%;
+            width: 140px;
+            height: 140px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 60%, #0077be 100%);
+            box-shadow:
+                0 0 80px rgba(79, 172, 254, 0.6),
+                inset -15px -15px 50px rgba(0, 0, 0, 0.3),
+                inset 8px 8px 30px rgba(255, 255, 255, 0.2);
         }
 
         /* Vòng hành tinh */
@@ -313,66 +812,210 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
-            width: 140px;
-            height: 30px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%) rotateX(75deg);
+            width: 200px;
+            height: 40px;
+            border: 5px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            box-shadow:
+                0 0 20px rgba(255, 255, 255, 0.3),
+                inset 0 0 20px rgba(79, 172, 254, 0.2);
+        }
+
+        @keyframes orbitPlanet {
+            0% { transform: rotate(0deg) translateX(30px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(30px) rotate(-360deg); }
+        }
+
+        /* Mặt trăng */
+        .moon {
+            position: absolute;
+            top: 20%;
+            right: 25%;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #f5f5f5, #d0d0d0);
+            border-radius: 50%;
+            box-shadow:
+                0 0 40px rgba(255, 255, 255, 0.4),
+                inset -8px -8px 20px rgba(0, 0, 0, 0.2);
+            animation: moonGlow 5s ease-in-out infinite;
+        }
+
+        @keyframes moonGlow {
+            0%, 100% { box-shadow: 0 0 40px rgba(255, 255, 255, 0.4), inset -8px -8px 20px rgba(0, 0, 0, 0.2); }
+            50% { box-shadow: 0 0 60px rgba(255, 255, 255, 0.6), inset -8px -8px 20px rgba(0, 0, 0, 0.2); }
+        }
+
+        /* UFO nhỏ */
+        .ufo {
+            position: absolute;
+            bottom: 30%;
+            left: 15%;
+            width: 60px;
+            height: 25px;
+            background: linear-gradient(to bottom, #a0a0a0, #606060);
+            border-radius: 50% 50% 20% 20%;
+            animation: ufoFloat 6s ease-in-out infinite;
+            box-shadow: 0 5px 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .ufo::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 35px;
+            height: 20px;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.4), transparent);
             border-radius: 50%;
         }
 
-        /* Particles */
+        .ufo::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 15px;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.6), transparent);
+            border-radius: 50%;
+            animation: ufoBeam 2s ease-in-out infinite;
+        }
+
+        @keyframes ufoFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes ufoBeam {
+            0%, 100% { opacity: 0.3; transform: translateX(-50%) scaleX(1); }
+            50% { opacity: 0.7; transform: translateX(-50%) scaleX(1.2); }
+        }
+
+        /* Particles lấp lánh */
         .particle {
             position: absolute;
-            background: rgba(255, 255, 255, 0.8);
+            background: white;
             border-radius: 50%;
-            animation: floatParticle 10s linear infinite;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            animation: floatParticle 15s linear infinite;
         }
 
         @keyframes floatParticle {
             0% {
-                transform: translateY(100vh) translateX(0);
+                transform: translateY(110vh) translateX(0) rotate(0deg);
                 opacity: 0;
             }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
             100% {
-                transform: translateY(-100px) translateX(100px);
+                transform: translateY(-10vh) translateX(100px) rotate(360deg);
                 opacity: 0;
             }
+        }
+
+        /* Satellite */
+        .satellite {
+            position: absolute;
+            top: 35%;
+            right: 30%;
+            width: 40px;
+            height: 30px;
+            background: #c0c0c0;
+            border-radius: 5px;
+            animation: satelliteOrbit 20s linear infinite;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .satellite::before,
+        .satellite::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: #ff9900;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .satellite::before {
+            left: -55px;
+        }
+
+        .satellite::after {
+            right: -55px;
+        }
+
+        @keyframes satelliteOrbit {
+            0% { transform: rotate(0deg) translateX(150px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(150px) rotate(-360deg); }
         }
     </style>
 </head>
 <body>
     <div class="space">
-        <!-- Các ngôi sao -->
+        <!-- Nebula clouds -->
+        <div class="nebula nebula1"></div>
+        <div class="nebula nebula2"></div>
+        <div class="nebula nebula3"></div>
+
+        <!-- Ngôi sao -->
         <div class="stars" id="starsContainer"></div>
 
-        <!-- Shooting stars -->
-        <div class="shooting-star" style="top: 20%; left: 80%; animation-delay: 0s;"></div>
-        <div class="shooting-star" style="top: 40%; left: 90%; animation-delay: 2s;"></div>
-        <div class="shooting-star" style="top: 60%; left: 85%; animation-delay: 4s;"></div>
+        <!-- Sao băng -->
+        <div class="shooting-star" style="top: 15%; left: 80%; animation-delay: 0s;"></div>
+        <div class="shooting-star" style="top: 35%; left: 90%; animation-delay: 2s;"></div>
+        <div class="shooting-star" style="top: 55%; left: 85%; animation-delay: 4s;"></div>
+        <div class="shooting-star" style="top: 75%; left: 75%; animation-delay: 6s;"></div>
 
-        <!-- Hành tinh -->
-        <div class="planet planet1"></div>
+        <!-- Hành tinh với crater -->
+        <div class="planet planet1">
+            <div class="crater crater1"></div>
+            <div class="crater crater2"></div>
+            <div class="crater crater3"></div>
+            <div class="crater crater4"></div>
+        </div>
         <div class="planet planet2"></div>
+
+        <!-- Mặt trăng -->
+        <div class="moon">
+            <div class="crater crater1"></div>
+            <div class="crater crater2"></div>
+            <div class="crater crater3"></div>
+        </div>
+
+        <!-- UFO -->
+        <div class="ufo"></div>
+
+        <!-- Satellite -->
+        <div class="satellite"></div>
 
         <!-- Mèo phi hành gia -->
         <div class="astronaut-cat-container">
             <div class="astronaut-cat">
                 <!-- Tai -->
-                <div class="ear left"></div>
-                <div class="ear right"></div>
+                <div class="ear left">
+                    <div class="ear-inner"></div>
+                </div>
+                <div class="ear right">
+                    <div class="ear-inner"></div>
+                </div>
 
                 <!-- Mũ phi hành gia -->
-                <div class="helmet"></div>
+                <div class="helmet">
+                    <div class="helmet-reflection"></div>
+                </div>
                 <div class="helmet-ring"></div>
 
-                <!-- Đầu -->
-                <div class="cat-head"></div>
+                <!-- Đầu mèo -->
+                <div class="cat-head">
+                    <div class="stripe stripe1"></div>
+                    <div class="stripe stripe2"></div>
+                    <div class="stripe stripe3"></div>
+                </div>
 
                 <!-- Mắt -->
                 <div class="eyes">
@@ -380,12 +1023,45 @@
                     <div class="eye"></div>
                 </div>
 
+                <!-- Má hồng -->
+                <div class="cheeks">
+                    <div class="cheek"></div>
+                    <div class="cheek"></div>
+                </div>
+
                 <!-- Mũi -->
                 <div class="nose"></div>
 
-                <!-- Bộ đồ -->
+                <!-- Miệng -->
+                <div class="mouth"></div>
+
+                <!-- Râu -->
+                <div class="whiskers">
+                    <div class="whisker left1"></div>
+                    <div class="whisker left2"></div>
+                    <div class="whisker left3"></div>
+                    <div class="whisker right1"></div>
+                    <div class="whisker right2"></div>
+                    <div class="whisker right3"></div>
+                </div>
+
+                <!-- Bộ đồ phi hành gia -->
                 <div class="space-suit">
                     <div class="suit-logo">🐱</div>
+                    <div class="suit-tube left"></div>
+                    <div class="suit-tube right"></div>
+                    <div class="suit-pocket left"></div>
+                    <div class="suit-pocket right"></div>
+                </div>
+
+                <!-- Tay áo -->
+                <div class="arms">
+                    <div class="arm left">
+                        <div class="hand"></div>
+                    </div>
+                    <div class="arm right">
+                        <div class="hand"></div>
+                    </div>
                 </div>
 
                 <!-- Chân -->
@@ -393,6 +1069,9 @@
                     <div class="leg"></div>
                     <div class="leg"></div>
                 </div>
+
+                <!-- Đuôi -->
+                <div class="tail"></div>
             </div>
         </div>
 
@@ -401,22 +1080,22 @@
     </div>
 
     <script>
-        // Tạo ngôi sao ngẫu nhiên
+        // Tạo ngôi sao
         function createStars() {
             const starsContainer = document.getElementById('starsContainer');
-            const numberOfStars = 200;
+            const numberOfStars = 300;
 
             for (let i = 0; i < numberOfStars; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
 
-                const size = Math.random() * 3;
+                const size = Math.random() * 4;
                 star.style.width = size + 'px';
                 star.style.height = size + 'px';
                 star.style.left = Math.random() * 100 + '%';
                 star.style.top = Math.random() * 100 + '%';
                 star.style.animationDelay = Math.random() * 3 + 's';
-                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                star.style.animationDuration = (Math.random() * 4 + 2) + 's';
 
                 starsContainer.appendChild(star);
             }
@@ -425,38 +1104,56 @@
         // Tạo particles
         function createParticles() {
             const particlesContainer = document.getElementById('particlesContainer');
-            const numberOfParticles = 30;
+            const numberOfParticles = 50;
 
             for (let i = 0; i < numberOfParticles; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
 
-                const size = Math.random() * 4 + 1;
+                const size = Math.random() * 5 + 1;
                 particle.style.width = size + 'px';
                 particle.style.height = size + 'px';
                 particle.style.left = Math.random() * 100 + '%';
-                particle.style.bottom = '0';
-                particle.style.animationDelay = Math.random() * 10 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particle.style.bottom = '-10px';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 15 + 15) + 's';
 
                 particlesContainer.appendChild(particle);
             }
         }
 
-        // Khởi tạo khi trang load
+        // Khởi tạo
         window.addEventListener('load', () => {
             createStars();
             createParticles();
         });
 
-        // Hiệu ứng di chuyển mèo theo chuột (tùy chọn)
-        document.addEventListener('mousemove', (e) => {
-            const cat = document.querySelector('.astronaut-cat-container');
-            const x = (e.clientX / window.innerWidth - 0.5) * 50;
-            const y = (e.clientY / window.innerHeight - 0.5) * 50;
+        // Hiệu ứng di chuyển mèo theo chuột (smooth)
+        let mouseX = 0;
+        let mouseY = 0;
+        let catX = 0;
+        let catY = 0;
 
-            cat.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth - 0.5) * 60;
+            mouseY = (e.clientY / window.innerHeight - 0.5) * 60;
         });
+
+        function updateCatPosition() {
+            catX += (mouseX - catX) * 0.05;
+            catY += (mouseY - catY) * 0.05;
+
+            const cat = document.querySelector('.astronaut-cat-container');
+            if (cat) {
+                cat.style.setProperty('--mouse-x', catX + 'px');
+                cat.style.setProperty('--mouse-y', catY + 'px');
+                cat.style.transform = `translate(calc(-50% + ${catX}px), calc(-50% + ${catY}px))`;
+            }
+
+            requestAnimationFrame(updateCatPosition);
+        }
+
+        updateCatPosition();
     </script>
 </body>
 </html>
